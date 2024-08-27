@@ -1,16 +1,25 @@
+"use client"
+
 import Image from "next/image";
 import RenderRating from "@/src/components/rating/RenderRating";
 import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {addToCart} from "@/src/lib/slice/CartSlice";
 
 const ProductDetails = ({product}) => {
   const [showClass, setShowClass] = useState(false);
+  const dispatch = useDispatch();
   if (!product) {
     return <p className="text-center text-gray-500">Mahsulot topilmadi</p>;
   }
-
   const toggleShowClass = () => {
     setShowClass(!showClass);
   }
+
+  const addToCartProduct = (product) => {
+    dispatch(addToCart(product))
+  }
+
   return (
       <div>
         <div
@@ -46,8 +55,8 @@ const ProductDetails = ({product}) => {
               <div className="mt-4 flex justify-between items-center gap-4">
                 <span onClick={() => toggleShowClass()}
                       className="underline  ">( {product.reviews.length} reviews )</span>
-                <button
-                    className="px-6 bg-slate-600 text-white py-2 rounded-lg hover:bg-slate-500 focus:outline-none focus:ring-3 focus:ring-slate-400 focus:ring-opacity-50">
+                <button onClick={() => addToCartProduct(product)}
+                    className="px-6 bg-slate-600 text-white py-2 rounded-lg hover:bg-slate-500">
                   Add to Cart
                 </button>
               </div>

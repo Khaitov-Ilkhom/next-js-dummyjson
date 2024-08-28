@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {saveToLocalStorage} from "@/src/utils/SaveToLocalStorage";
 
 const initialState = {
-  likedProducts: JSON.parse(localStorage.getItem("liked")) || [],
+  likedProducts: typeof window !== "undefined" ? JSON.parse(localStorage.getItem("liked")) || [] : [],
 };
 
 

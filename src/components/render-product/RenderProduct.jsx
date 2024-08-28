@@ -16,7 +16,6 @@ const RenderProduct = ({data}) => {
 
   const isProductLiked = (id) => {
     return likedProducts?.some(product => product.id === id)
-
   };
 
   const handleLike = (product) => {

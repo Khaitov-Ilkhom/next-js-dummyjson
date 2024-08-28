@@ -18,7 +18,7 @@ const Header = () => {
           <Link href="/"><Image width={60} height={60} src={logo} alt="Logo"/></Link>
         </div>
         <div>
-          Search
+          <input className="py-1 px-3 border border-slate-500 rounded-xl" placeholder="Search... " />
         </div>
         <div>
           <ul className="flex justify-center items-center gap-4 px-6">

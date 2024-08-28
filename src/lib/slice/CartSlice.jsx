@@ -17,9 +17,13 @@ const CartSlice = createSlice({
         state.cart.push(action.payload);
       }
       saveToLocalStorage("carts" , state.cart);
+    },
+    removeCart: (state, action) => {
+      state.cart = state.cart.filter((product) => product.id !== action.payload);
+      saveToLocalStorage("carts", state.cart);
     }
   }
 })
 
 export const {reducer} = CartSlice
-export const {addToCart} = CartSlice.actions;
+export const {addToCart, removeCart} = CartSlice.actions;

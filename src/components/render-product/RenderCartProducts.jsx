@@ -6,6 +6,7 @@ import RenderRating from "@/src/components/rating/RenderRating";
 import Link from "next/link";
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {addToLiked} from "@/src/lib/slice/LikeSlice";
+import {removeCart} from "@/src/lib/slice/CartSlice";
 
 const RenderCartProducts = () => {
   const {cart} = useSelector(state => state.addCart);
@@ -14,12 +15,15 @@ const RenderCartProducts = () => {
 
   const isProductLiked = (id) => {
     return likedProducts?.some(product => product.id === id)
-
   };
 
   const handleLike = (product) => {
     dispatch(addToLiked(product));
   }
+  const removeFromCart = (product) => {
+    dispatch(removeCart(product.id))
+  }
+
   return (
       <div className="px-[30px]">
         <div className="grid grid-cols-4 max-w-[1200px] mx-auto gap-4">
@@ -51,10 +55,11 @@ const RenderCartProducts = () => {
                       <p>${product.price}</p>
                     </div>
                     <p className="line-clamp-2 pt-2">{product.description}</p>
-                    <div className="w-full flex text-center mt-2">
+                    <div className="w-full flex justify-center items-center gap-2 text-center mt-2">
                       <Link href={`/products/${product.id}`}
                             className="w-full text-white border border-slate-600 py-1 rounded-lg bg-slate-700 hover:bg-slate-600 hover:ring-2 ring-slate-300">View
                         More</Link>
+                       <button onClick={() => removeFromCart(product)} className="w-full px-1 text-white border border-red-600 py-1 rounded-lg bg-red-700 hover:bg-red-600">Remove cart</button>
                     </div>
                   </div>
                 </div>
